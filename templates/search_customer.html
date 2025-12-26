@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Customer</title>
+</head>
+<body>
+    <h2>Search Customer by Name</h2>
+
+    <form method="post">
+        Name: <input type="text" name="name" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if customers %}
+        <h3>Search Results</h3>
+        <ul>
+        {% for customer in customers %}
+            <p>
+                Name: {{ customer['name'] }} <br>
+                Email: {{ customer['email'] }} <br>
+                Phone: {{ customer['phone'] }} <br>
+
+                <a href="/update/{{ customer['email'] }}">Edit</a> |
+                <a href="/delete/{{ customer['email'] }}"
+                onclick="return confirm('Are you sure?')">Delete</a>
+            </p>
+            <hr>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
