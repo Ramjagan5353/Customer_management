@@ -104,9 +104,11 @@ def delete_customer(email):
 @app.route('/')
 def home():
     return """
+    <center>
     <h2>Customer Management</h2>
     <a href='/add'>Add Customer</a><br><br>
     <a href='/search'>Search Customer</a>
+    </center>
     """
 
 if __name__ == '__main__':
