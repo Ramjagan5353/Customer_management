@@ -14,7 +14,8 @@ conn.execute("""
 CREATE TABLE IF NOT EXISTS customers (
     name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    phone TEXT NOT NULL
+    phone TEXT NOT NULL,
+    dob DATE NOT NULL
 )
 """)
 conn.commit()
@@ -26,12 +27,13 @@ def add_customer():
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
+        dob=request.form['dob']
 
         try:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO customers (name, email, phone) VALUES (?, ?, ?)",
-                (name, email, phone)
+                "INSERT INTO customers (name, email, phone,dob) VALUES (?, ?, ?,?)",
+                (name, email, phone,dob)
             )
             conn.commit()
             conn.close()
@@ -69,15 +71,15 @@ def update_customer(email):
         new_name = request.form['name']
         new_email = request.form['email']
         new_phone = request.form['phone']
-
+        new_dob=request.form['dob']
         try:
             conn.execute(
                 """
                 UPDATE customers
-                SET name = ?, email = ?, phone = ?
+                SET name = ?, email = ?, phone = ?,dob=?
                 WHERE email = ?
                 """,
-                (new_name, new_email, new_phone, email)
+                (new_name, new_email, new_phone,new_dob, email)
             )
             conn.commit()
             conn.close()
