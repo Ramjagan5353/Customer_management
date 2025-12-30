@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
 from datetime import datetime, date
+import re
 
 app = Flask(__name__)
 
@@ -38,6 +39,8 @@ def add_customer():
         if age < 18:
             return "Error: Customer must be at least 18 years old!"
 
+        if not(len(phone)==13 and re.match('+91',phone[:3]) and re.match('\\d{10}',phone[3:13])):
+            return "Error: Idhem number ra babu"
         try:
             conn = get_db_connection()
             conn.execute(
