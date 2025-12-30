@@ -1,0 +1,51 @@
+error
+re.error: nothing to repeat at position 0
+
+Traceback (most recent call last)
+File "C:\Users\RAMJAGAN\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1536, in __call__
+return self.wsgi_app(environ, start_response)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\RAMJAGAN\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1514, in wsgi_app
+response = self.handle_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\RAMJAGAN\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1511, in wsgi_app
+response = self.full_dispatch_request()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\RAMJAGAN\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 919, in full_dispatch_request
+rv = self.handle_user_exception(e)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\RAMJAGAN\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 917, in full_dispatch_request
+rv = self.dispatch_request()
+     ^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\RAMJAGAN\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 902, in dispatch_request
+return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\customer\customer_management\app.py", line 42, in add_customer
+if not(len(phone)==13 and re.match('+91',phone[:3]) and re.match('\\d{10}',phone[3:13])):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Program Files\Python312\Lib\re\__init__.py", line 167, in match
+return _compile(pattern, flags).match(string)
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Program Files\Python312\Lib\re\__init__.py", line 307, in _compile
+p = _compiler.compile(pattern, flags)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Program Files\Python312\Lib\re\_compiler.py", line 745, in compile
+p = _parser.parse(p, flags)
+    ^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Program Files\Python312\Lib\re\_parser.py", line 979, in parse
+p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Program Files\Python312\Lib\re\_parser.py", line 460, in _parse_sub
+itemsappend(_parse(source, state, verbose, nested + 1,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Program Files\Python312\Lib\re\_parser.py", line 687, in _parse
+raise source.error("nothing to repeat",
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+re.error: nothing to repeat at position 0
+The debugger caught an exception in your WSGI application. You can now look at the traceback which led to the error.
+To switch between the interactive traceback and the plaintext one, you can click on the "Traceback" headline. From the text traceback you can also create a paste of it. For code execution mouse-over the frame you want to debug and click on the console icon on the right side.
+
+You can execute arbitrary Python code in the stack frames and there are some extra helpers available for introspection:
+
+dump() shows all variables in the frame
+dump(obj) dumps all that's known about the object
