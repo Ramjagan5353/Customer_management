@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import sqlite3
+from datetime import datetime, date
 
 app = Flask(__name__)
 
@@ -27,7 +28,15 @@ def add_customer():
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
-        dob=request.form['dob']
+        dob = request.form['dob']
+        
+        # Check if customer is at least 18 years old
+        birth_date = datetime.strptime(dob, '%Y-%m-%d').date()
+        today = date.today()
+        age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+        
+        if age < 18:
+            return "Error: Customer must be at least 18 years old!"
 
         try:
             conn = get_db_connection()
@@ -71,7 +80,17 @@ def update_customer(email):
         new_name = request.form['name']
         new_email = request.form['email']
         new_phone = request.form['phone']
-        new_dob=request.form['dob']
+        new_dob = request.form['dob']
+        
+        # Check if customer is at least 18 years old
+        birth_date = datetime.strptime(new_dob, '%Y-%m-%d').date()
+        today = date.today()
+        age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+        
+        if age < 18:
+            conn.close()
+            return "Error: Customer must be at least 18 years old!"
+        
         try:
             conn.execute(
                 """
