@@ -39,8 +39,9 @@ def add_customer():
         if age < 18:
             return "Error: Customer must be at least 18 years old!"
 
-        if not(len(phone)==13 and re.match('+91',phone[:3]) and re.match('\\d{10}',phone[3:13])):
-            return "Error: Idhem number ra babu"
+        # Validate phone number
+        if not re.match(r'\+91\d{10}$', phone):
+            return "Error: Phone number must start with +91 followed by 10 digits!"
         try:
             conn = get_db_connection()
             conn.execute(
